@@ -1,1 +1,87 @@
-/* pages/index/index.wxss */
+
+/* 轮播图区域 */
+.banners {
+  width: 100%;
+  height: 300rpx;
+}
+.banners image {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* 五个图标导航区域 */
+.navContainer {
+  display: flex;
+}
+.navContainer .navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+/*.iconfont类的 权重是10  总权重 = 10 + 10 */
+.navItem .iconfont {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 100rpx;
+  background-color: rgb(240, 19, 19);
+  font-size: 50rpx;
+  color: #fff;
+  margin: 20rpx 0;
+}
+/* text标签的 权重是1 总权重 = 10 + 1 */
+.navItem text {
+  font-size: 26rpx;
+}
+
+
+/* 推荐歌曲区域 */
+.recommentContainer {
+  padding: 20rpx;
+}
+.recommentContainer .header {
+  padding-bottom: 20rpx;
+}
+.recommentContainer .header .title {
+  font-size: 32rpx;
+  line-height: 80rpx;
+  color: #666;
+}
+.recommentContainer .header .more {
+  float: right;
+  border: 1rpx solid #333;
+  padding: 10rpx 20rpx;
+  font-size: 24rpx;
+  border-radius: 30rpx;
+} 
+/* 推荐内容区 */
+.recommentScroll {
+  display: flex;
+}
+.scrollItem {
+  width: 200rpx;
+  margin-right: 20rpx;
+}
+.scrollItem image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+}
+.scrollItem text {
+  font-size: 26rpx;
+  /* 单行文本溢出隐藏 */
+  /*display: block;*/ /*让text标签，由内联元素变为，块级元素*/
+  /*white-space: nowrap; /*不让换行*/
+  /*overflow: hidden; /*超出部分隐藏，断崖式的切断 需作用在块元素上，对内联元素设置不生效*/
+  /*text-overflow: ellipsis; /*使用省略号代替隐藏部分*/
+  
+  /* 多行文本溢出隐藏 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;/*常规属性搞不定，需要到内核属性，使用webkit的盒模型*/
+  -webkit-box-orient: vertical; /*垂直布局，纵向对齐*/
+  -webkit-line-clamp: 2; /*设置盒子多行的行数*/
+}

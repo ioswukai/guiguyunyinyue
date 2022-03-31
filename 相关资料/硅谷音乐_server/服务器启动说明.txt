@@ -1,0 +1,10 @@
+准备工作
+1. 终端cd到进入根目录
+2. 安装 nodemon：npm install nodemon
+
+启动服务器
+3. 根目录下执行： npm start
+
+说明
+1. 服务器地址： http://localhost:3000
+2. 示例: http://localhost:3000/banner
