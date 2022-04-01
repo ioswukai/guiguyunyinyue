@@ -33,7 +33,8 @@ Page({
   },
   // 获取用户播放记录的功能函数
   async getUserRecentPlayList(userId){
-    let recentPlayListData = await request('/user/record', {uid: userId, type: 0});
+    const data = {uid: userId, type: 0};
+    let recentPlayListData = await request('/user/record', {data});
     let index = 0;
     let recentPlayList = recentPlayListData.allData.splice(0, 10).map(item => {
       item.id = index++;

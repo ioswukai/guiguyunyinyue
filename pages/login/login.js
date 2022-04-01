@@ -72,7 +72,7 @@ Page({
       wx.showToast({
         title: '登录成功'
       })
-      debugger
+      
       // 将用户的信息存储至本地
       wx.setStorageSync('userInfo', JSON.stringify(result.profile))
       
