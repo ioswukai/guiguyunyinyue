@@ -60,6 +60,8 @@
 /* 推荐内容区 */
 .recommentScroll {
   display: flex;
+  /*虽然是`横向`排列了，但在计算`height`高度时`scroll-view`仍然以`纵向`的情况计算，所以在设置`scroll-view`样式时，**必须手动指定`scroll-view`的高度***/
+  /* height: 300rpx; */
 }
 .scrollItem {
   width: 200rpx;
@@ -84,4 +86,10 @@
   display: -webkit-box;/*常规属性搞不定，需要到内核属性，使用webkit的盒模型*/
   -webkit-box-orient: vertical; /*垂直布局，纵向对齐*/
   -webkit-line-clamp: 2; /*设置盒子多行的行数*/
+}
+
+
+/* 排行榜区域 */
+.topList {
+  padding: 20rpx;
 }

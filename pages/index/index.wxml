@@ -33,26 +33,20 @@
   <!-- 推荐歌曲区域 -->
   <view class="recommentContainer">
   <!-- 头部区 -->
-   <view class="header">
-    <text class="title">推荐歌曲</text>
-    <view>
-      <text>为你精心推荐</text>
-      <text class="more">查看更多</text>
-    </view>
-   </view>
+   <NavHeader title="推荐歌曲" nav="为你精心推荐"></NavHeader>
    <!-- 内容区 -->
-   <scroll-view class="recommentScroll" enable-flex scroll-x>
+   <scroll-view class="recommentScroll" enable-flex scroll-x scroll-y="false">
     <view class="scrollItem" wx:for="{{recommentList}}" wx:key="id">
       <image src="{{item.picUrl}}"></image> 
       <text>{{item.name}}</text>
     </view> 
    </scroll-view>
-
   </view>
 
 <!-- 排行榜区域 -->
 <view class="topList">
   <!-- 头部区 -->
+  <NavHeader title="排行榜" nav="热歌风向标"></NavHeader>
   <!-- 内容区 -->
 </view>
 
