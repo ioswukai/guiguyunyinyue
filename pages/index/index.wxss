@@ -93,3 +93,38 @@
 .topList {
   padding: 20rpx;
 }
+.topListSwiper{
+  height: 400rpx;
+}
+.swiperItem{
+  width: 96%;
+  background-color:#fbfbfb;
+}
+.swiperItem .title {
+  font-size: 30rpx;
+  line-height: 80rpx;
+}
+.musicItem {
+  /*当一个元素设置为flex，其子元素会自动设置为block元素*/
+  display: flex;
+}
+.musicItem image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 20rpx;
+  border-radius: 6rpx;
+}
+.musicItem .count {
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+}
+.musicItem .musicName {
+  height: 100rpx;
+  line-height: 100rpx;
+  max-width: 400rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -9,6 +9,7 @@ Page({
   data: {
     bannerList: [], // 轮播图数据
     recommentList: [], //推荐歌单
+    topList: [], //排行榜
   },
 
   /**
@@ -19,6 +20,8 @@ Page({
     this.getBannerData();
     // 获取推荐列表数据
     this.getRecommentData();
+    // 获取排行榜数据
+    this.getRankData();
   },
 
   // 获取banner数据
@@ -36,6 +39,25 @@ Page({
     let recommentListData = await request('/personalized', {data})
     this.setData({
       recommentList: recommentListData.result
+    })
+  },
+
+  // 获取排行榜数据
+  async getRankData() {
+    let index = 0;
+    let resultArr = [];
+    while (index < 5) {
+      const data = {idx: index++};
+      let topListData = await request('/top/list', {data})
+      let topListItem = {
+        name: topListData.playlist.name, 
+        tracks: topListData.playlist.tracks.slice(0, 3)
+      }
+      resultArr.push(topListItem)
+    }
+    // 更新topList的值
+    this.setData({
+      topList: resultArr
     })
   },
 
