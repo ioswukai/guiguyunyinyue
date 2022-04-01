@@ -54,11 +54,18 @@ Page({
         tracks: topListData.playlist.tracks.slice(0, 3)
       }
       resultArr.push(topListItem)
+      // 更新topList的值 这里好处是不需要5次请求全部请求完，再更新数据，用户体验好
+      // 但是渲染的次数会多些
+      this.setData({
+        topList: resultArr
+      })
     }
-    // 更新topList的值
-    this.setData({
-      topList: resultArr
-    })
+
+    // 放在此处更新 由于等待网络数据返回 会导致页面长时间白屏
+    // // 更新topList的值
+    // this.setData({
+    //   topList: resultArr
+    // })
   },
 
   /**
