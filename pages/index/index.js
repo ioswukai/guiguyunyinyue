@@ -7,16 +7,36 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    bannerList: [], // 轮播图数据
+    recommentList: [], //推荐歌单
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: async function (options) {
-    const params = {type: 2};
-    let bannerListData = await request('/banner', {params})
-    console.log('bannerListData = ', bannerListData)
+  onLoad: function (options) {
+    // 获取banner数据
+    this.getBannerData();
+    // 获取推荐列表数据
+    this.getRecommentData();
+  },
+
+  // 获取banner数据
+  async getBannerData() {
+    const data = {type: 2};
+    let bannerListData = await request('/banner', {data})
+    this.setData({
+      bannerList: bannerListData.banners
+    })
+  },
+
+  // 获取推荐列表数据
+  async getRecommentData() {
+    const data = {limit: 10};
+    let recommentListData = await request('/personalized', {data})
+    this.setData({
+      recommentList: recommentListData.result
+    })
   },
 
   /**
