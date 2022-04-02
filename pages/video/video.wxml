@@ -33,7 +33,14 @@
       src="{{item.data.urlInfo.url}}"
       bindplay="handlePlay"
       id="{{item.data.vid}}"
+      poster="{{item.data.coverUrl}}"
+      object-fit="fill"
+      autoplay
+      class="common"
+      wx:if="{{vid === item.data.vid}}"
       ></video>
+      <!-- 性能优化，使用image标签代替video标签 -->
+      <image src="{{item.data.coverUrl}}" class="common" bindtap="handlePlay" id="{{item.data.vid}}" wx:else></image>
       <view class="content">{{item.data.title}}</view>
       <view class="footer">
         <image class="avatar" src="{{item.data.creator.avatarUrl}}"></image>

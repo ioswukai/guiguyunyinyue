@@ -44,7 +44,7 @@ Page({
     const videoListData = await request('/video/group',{data})
     // 隐藏加载框
     wx.hideLoading()
-    const videoList = videoListData.datas.map((item, index) => {
+    const videoList = videoListData.datas && videoListData.datas.map((item, index) => {
       item.id = index
       return item;
     })
@@ -85,22 +85,24 @@ Page({
     * */
 
     let vid = event.currentTarget.id;
-    if (this.data.vid) {
-    // 存在之前的vid
-    if (this.data.vid !== vid) {
-      // 点击不同的视频，则关闭之前的视频
-      this.videoContext.stop();
-    } else {
-      // 点击相同的视频，则是继续播放，下面逻辑无需处理
-      return;
-    }
-  }
+    // 多个视频同时播放的问题，优化为image后，只有一个视频；所以此逻辑作废
+    // if (this.data.vid) {
+    // // 存在之前的vid
+    // if (this.data.vid !== vid) {
+    //   // 点击不同的视频，则关闭之前的视频
+    //   this.videoContext.stop();
+    // } else {
+    //   // 点击相同的视频，则是继续播放，下面逻辑无需处理
+    //   return;
+    // }
+  // }
     // 创建 新的控制video标签的实例对象
     this.videoContext = wx.createVideoContext(vid);
     this.setData({
       vid
     })
-    console.log(vid, videoContext, this.videoContext)
+    // 播放视频 这样切换视频时会出现多个声音，改用autoplay属性播放，可解决此bug
+    // this.videoContext.play();
   },
 
   /**
