@@ -56,6 +56,8 @@
   /* 视口单位： vh vw  1vh = 1%的视口高度  1vw = 1%的视口宽度*/
   /* 可以通过 scroll-view外层容器是否有滚动条，来判断高度是否设置正确，外层容器不能有滚动条 */
   height: calc(100vh -  166rpx);
+  /* 测试页面下拉刷新 */
+  /* height: calc(100vh -  100rpx); */
 }
 .videoItem {
   padding: 3% 3% 0 3%;

@@ -27,7 +27,15 @@
     </view>
   </scroll-view>
   <!-- tab内容 -->
-  <scroll-view scroll-y scroll-x="false" class="videoScroll">
+  <scroll-view 
+    scroll-y 
+    scroll-x="false" 
+    class="videoScroll"
+    refresher-enabled
+    refresher-triggered="{{isTriggered}}"
+    bindrefresherrefresh="handleRefresher"
+    bindscrolltolower="handleToLower"
+    >
     <view class="videoItem" wx:for="{{videoList}}" wx:key="id">
       <video 
       src="{{item.data.urlInfo.url}}"
