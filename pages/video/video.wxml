@@ -29,7 +29,11 @@
   <!-- tab内容 -->
   <scroll-view scroll-y scroll-x="false" class="videoScroll">
     <view class="videoItem" wx:for="{{videoList}}" wx:key="id">
-      <video src="{{item.data.urlInfo.url}}"></video>
+      <video 
+      src="{{item.data.urlInfo.url}}"
+      bindplay="handlePlay"
+      id="{{item.data.vid}}"
+      ></video>
       <view class="content">{{item.data.title}}</view>
       <view class="footer">
         <image class="avatar" src="{{item.data.creator.avatarUrl}}"></image>
