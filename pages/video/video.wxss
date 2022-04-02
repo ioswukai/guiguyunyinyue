@@ -1,1 +1,50 @@
-/* pages/video/video.wxss */
+/* 头部区域 */
+.videoContainer .header {
+  display: flex;
+  padding: 20rpx;
+}
+.videoContainer .header image {
+  width: 60rpx;
+  height: 60rpx;
+}
+.videoContainer .header .search {
+  border: 1rpx solid #eee;
+   /*flex-grow: 可拉伸 flex-shrink： 可压缩 flex-basis: 当前元素的宽度*/
+  /*flex默认值: flex-grow: 0, flex-shrink: 1, flex-basis: auto*/
+  /*flex:1  flex-grow: 1, flex-shrink: 1, flex-basis: 0%*/
+  /*flex:auto  flex-grow: 1, flex-shrink: 1, flex-basis: auto*/
+  /*flex: 1会导致父元素宽度自动为100%*/
+  flex: 1;
+  margin: 0 20rpx;
+  font-size: 26rpx;
+  text-align: center;
+  /*我们没设置search高度，继承父高度，父高度同图片高度*/
+  line-height: 60rpx;
+  color: #d43c33
+}
+
+
+/* 导航区域 */
+.navScroll {
+  display: flex;
+  /* 禁止换行，因为如果横向宽度不够，会自动换行纵向布局*/
+  white-space: nowrap;
+}
+/*隐藏滚动条*/
+.navScroll ::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.navScroll .navItem {
+  margin-bottom: 1rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* navItem的border-bottom 被遮挡bug */
+  margin-bottom: 1rpx;
+}
+.navItem .active {
+  border-bottom: 1rpx solid #d43c33;
+}
