@@ -11,6 +11,7 @@ Page({
     navId: 0, // 选中导航的标识
     videoList: [], // 导航对应的视频列表
     vid: null, // 前一个视频的id
+    videoUpdateTime: [], // 记录每个视频播放时间的数组
   },
 
   /**
@@ -103,6 +104,45 @@ Page({
     })
     // 播放视频 这样切换视频时会出现多个声音，改用autoplay属性播放，可解决此bug
     // this.videoContext.play();
+    // 判断当前的视频之前是否播放过，是否有播放记录, 如果有，跳转至指定的播放位置
+    let {videoUpdateTime} = this.data;
+    let videoItem = videoUpdateTime.find(item => item.vid === vid);
+    if(videoItem){
+      // 调整至指定位置
+      this.videoContext.seek(videoItem.currentTime);
+    }
+  },
+
+  /* 监听视频播放进度的回调 */
+  handleTimeUpdate(event) {
+    let videoTimeObj = {vid: event.currentTarget.id, currentTime: event.detail.currentTime};
+    let {videoUpdateTime} = this.data;
+      /*
+    * 思路： 判断记录播放时长的videoUpdateTime数组中是否有当前视频的播放记录
+    *   1. 如果有，在原有的播放记录中修改播放时间为当前的播放时间
+    *   2. 如果没有，需要在数组中添加当前视频的播放对象
+    *
+    * */
+   let videoItem = videoUpdateTime.find(item => item.vid === videoTimeObj.vid);
+   if(videoItem){ // 之前有
+     videoItem.currentTime = event.detail.currentTime;
+   }else { // 之前没有
+     videoUpdateTime.push(videoTimeObj);
+   }
+   // 更新videoUpdateTime的状态
+   this.setData({
+     videoUpdateTime
+   })
+  },
+
+  /* 视频播放结束调用的回调 */
+  handleEnded(event){
+    // 移除记录播放时长数组中当前视频的对象
+    let {videoUpdateTime} = this.data;
+    videoUpdateTime.splice(videoUpdateTime.findIndex(item => item.vid === event.currentTarget.id), 1);
+    this.setData({
+      videoUpdateTime
+    })
   },
 
   /**

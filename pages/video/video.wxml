@@ -32,6 +32,8 @@
       <video 
       src="{{item.data.urlInfo.url}}"
       bindplay="handlePlay"
+      bindtimeupdate="handleTimeUpdate"
+      bindended="handleEnded"
       id="{{item.data.vid}}"
       poster="{{item.data.coverUrl}}"
       object-fit="fill"
