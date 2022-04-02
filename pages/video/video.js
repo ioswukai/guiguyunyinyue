@@ -9,6 +9,7 @@ Page({
   data: {
     videoGroupList: [], // 导航的标签数据
     navId: 0, // 选中导航的标识
+    videoList: [], // 导航对应的视频列表
   },
 
   /**
@@ -16,7 +17,7 @@ Page({
    */
   onLoad: function (options) {
     // 获取导航的标签数据
-    this.getVideoGroupData()
+    this.getVideoGroupData();
   },
 
   /* 获取导航的标签数据 */
@@ -26,6 +27,21 @@ Page({
       videoGroupList: videoGroupListData.data.slice(0, 14),
       navId: videoGroupListData.data[0].id
     })
+    // 获取导航对应视频列表数据
+    this.getVideoListData(videoGroupListData.data[0].id);
+  },
+
+  /* 获取导航对应视频列表数据 */
+  async getVideoListData(navId) {
+    if (!navId) return;
+    
+    const data = {id: navId}
+    const videoListData = await request('/video/group',{data})
+    const videoList = videoListData.datas.map((item, index) => {
+      item.id = index
+      return item;
+    })
+    this.setData({videoList})
   },
 
   /* 切换导航的回调 */
@@ -38,6 +54,8 @@ Page({
     // 通过`data-key=value`向`event`传参的时候如果传的是`number`**它并不会自动转换成**`string`
     const navId = event.currentTarget.dataset.id;
     this.setData({navId})
+    // 获取导航对应视频列表数据
+    this.getVideoListData(navId);
   },
 
   /**
@@ -51,7 +69,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 获取导航对应视频列表数据
+    this.getVideoListData(this.data.navId);
   },
 
   /**

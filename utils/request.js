@@ -43,6 +43,7 @@ export default  (
     requestConfig.data = data;
     requestConfig.params = params;
     requestConfig.header = {
+      // 用?:三目运算，防止没有cookies时，对null调用find方法导致崩溃
       cookie: wx.getStorageSync('cookies')?wx.getStorageSync('cookies').find(item => item.indexOf('MUSIC_U') !== -1):''
     };
 
