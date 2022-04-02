@@ -10,8 +10,17 @@
 
   <!-- 导航区域 -->
   <!-- tab头部 -->
-  <scroll-view scroll-x enable-flex scroll-y="false" class="navScroll" enhanced="true" show-scrollbar="{{false}}">
-    <view class="navItem" wx:for="{{videoGroupList}}" wx:key="id" bindtap="changeNav" id="{{item.id}}" data-id="{{item.id}}">
+  <scroll-view 
+  scroll-x 
+  enable-flex 
+  scroll-y="false" 
+  class="navScroll" 
+  enhanced="true" 
+  show-scrollbar="{{false}}"
+  scroll-into-view="{{'scroll' + navId}}"
+  scroll-with-animation
+  >
+    <view class="navItem" wx:for="{{videoGroupList}}" wx:key="id" bindtap="changeNav" id="{{'scroll' + item.id}}" data-id="{{item.id}}">
       <view class="navContent {{item.id === navId ? 'active' : ''}}" >
         {{item.name}}
       </view>

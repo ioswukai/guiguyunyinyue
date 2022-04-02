@@ -35,8 +35,14 @@ Page({
   async getVideoListData(navId) {
     if (!navId) return;
     
+    // 显示加载框
+    wx.showLoading({
+      title: '正在加载',
+    })
     const data = {id: navId}
     const videoListData = await request('/video/group',{data})
+    // 隐藏加载框
+    wx.hideLoading()
     const videoList = videoListData.datas.map((item, index) => {
       item.id = index
       return item;
@@ -53,7 +59,11 @@ Page({
     // })
     // 通过`data-key=value`向`event`传参的时候如果传的是`number`**它并不会自动转换成**`string`
     const navId = event.currentTarget.dataset.id;
-    this.setData({navId})
+    this.setData({
+      navId,
+      // 切换tab时，清空之前tab的显示
+      videoList: [] 
+    })
     // 获取导航对应视频列表数据
     this.getVideoListData(navId);
   },
