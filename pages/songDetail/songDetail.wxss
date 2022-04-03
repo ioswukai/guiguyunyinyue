@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
 }
-/*  */
+/* 底座 */
 .circle {
   position: relative;
   z-index: 100;
@@ -73,7 +73,6 @@
   /* 动画延时1s执行 */
   animation-delay: 1s;
 }
-
 /*
   @keyframes: 设置动画帧
     1) from to
@@ -92,4 +91,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* 底部控制播放区域 */
+.musicControl {
+  /* 自身的布局 */
+  width: 100%;
+  position: absolute;
+  bottom: 40rpx;
+  left: 0;
+  border-top: 1rpx solid white;
+  /* 对子元素的布局 */
+  display: flex;
+}
+.musicControl .iconfont {
+  flex: 1;
+  text-align: center;
+  height: 120rpx;
+  line-height: 120rpx;
+  color: white;
+  font-size: 50rpx;
+}
+.musicControl .big {
+  font-size: 80rpx;
 }
