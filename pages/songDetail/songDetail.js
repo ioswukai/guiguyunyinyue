@@ -35,18 +35,7 @@ Page({
     wx.setNavigationBarTitle({
       title: this.data.song.name
     })
-  },
-  // 点击播放/暂停的回调
-  handleMusicPlay(){
-    let isPlay = !this.data.isPlay;
-    // // 修改是否播放的状态
-    // this.setData({
-    //   isPlay
-    // })
-    
-    let {musicId, musicLink} = this.data;
-    this.musicControl(isPlay, musicId, musicLink);
-  },
+  },    
 
   /** 点击播放/暂停的回调 */
   handleMusicPlay() {
@@ -55,6 +44,25 @@ Page({
     this.setData({
       isPlay
     })
+    this.musicControl(isPlay) 
+  },
+  
+  /* 控制音乐播放、暂停的功能函数 */
+  async musicControl(isPlay) {
+    let backgroundAudioManager = wx.getBackgroundAudioManager();
+    if (isPlay) {
+      // 音乐播放
+      // 获取音乐播放的链接
+      let data = {id: this.data.song.id}
+      let musicLinkData = await request('/song/url', {data})
+      let musicLink = musicLinkData.data[0].url;
+      // 创建控制音乐播放的实例
+      backgroundAudioManager.src = musicLink;
+      backgroundAudioManager.title = this.data.song.name;
+    } else {
+      // 暂停音乐
+      backgroundAudioManager.pause();
+    }
   },
 
   /**
