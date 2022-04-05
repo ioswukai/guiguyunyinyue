@@ -14,6 +14,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    // 初始化自定义的app实例数据
+    isMusicPlay: false, // 是否有音乐在播放
+    musicId: '' // 音乐id
   }
 })

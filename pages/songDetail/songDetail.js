@@ -1,5 +1,6 @@
 import request from '../../utils/request'
-
+// 获取全局实例
+const appInstance = getApp();
 Page({
 
   /**
@@ -28,10 +29,20 @@ Page({
     *   1. 通过控制音频的实例 backgroundAudioManager 去监视音乐播放/暂停
     *
     * */
+    // 判断当前页面音乐是否在播放
+    if(appInstance.globalData.isMusicPlay && appInstance.globalData.musicId === musicId){
+      // 修改当前页面音乐播放状态为true
+      this.setData({
+        isPlay: true
+      })
+    }
+    
    this.backgroundAudioManager = wx.getBackgroundAudioManager();
    // 监视音乐播放/暂停/停止
    this.backgroundAudioManager.onPlay(() => {
     this.changePlayState(true);
+    // 修改全局音乐播放的id
+    appInstance.globalData.musicId = musicId;
   });
   this.backgroundAudioManager.onPause(() => {
     this.changePlayState(false);
@@ -47,6 +58,9 @@ Page({
     this.setData({
       isPlay
     })
+
+    // 修改全局音乐播放的状态
+    appInstance.globalData.isMusicPlay = isPlay;
   },
 
   // 获取音乐详情的功能函数
