@@ -21,6 +21,32 @@ Page({
     let musicId = options.musicId;
     // 获取音乐详情
     this.getMusicInfo(musicId);
+
+     /*
+    * 问题： 如果用户操作系统的控制音乐播放/暂停的按钮，页面不知道，导致页面显示是否播放的状态和真实的音乐播放状态不一致
+    * 解决方案：
+    *   1. 通过控制音频的实例 backgroundAudioManager 去监视音乐播放/暂停
+    *
+    * */
+   this.backgroundAudioManager = wx.getBackgroundAudioManager();
+   // 监视音乐播放/暂停/停止
+   this.backgroundAudioManager.onPlay(() => {
+    this.changePlayState(true);
+  });
+  this.backgroundAudioManager.onPause(() => {
+    this.changePlayState(false);
+  });
+  this.backgroundAudioManager.onStop(() => {
+    this.changePlayState(false);
+  });
+  },
+
+  // 修改播放状态的功能函数
+  changePlayState(isPlay){
+    // 修改音乐是否的状态
+    this.setData({
+      isPlay
+    })
   },
 
   // 获取音乐详情的功能函数
@@ -49,7 +75,6 @@ Page({
   
   /* 控制音乐播放、暂停的功能函数 */
   async musicControl(isPlay) {
-    let backgroundAudioManager = wx.getBackgroundAudioManager();
     if (isPlay) {
       // 音乐播放
       // 获取音乐播放的链接
@@ -57,11 +82,11 @@ Page({
       let musicLinkData = await request('/song/url', {data})
       let musicLink = musicLinkData.data[0].url;
       // 创建控制音乐播放的实例
-      backgroundAudioManager.src = musicLink;
-      backgroundAudioManager.title = this.data.song.name;
+      this.backgroundAudioManager.src = musicLink;
+      this.backgroundAudioManager.title = this.data.song.name;
     } else {
       // 暂停音乐
-      backgroundAudioManager.pause();
+      this.backgroundAudioManager.pause();
     }
   },
 
