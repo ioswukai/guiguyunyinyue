@@ -1,0 +1,23 @@
+{
+  "name": "guiguyunyinyue_study",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/ioswukai/guiguyunyinyue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ioswukai/guiguyunyinyue/issues"
+  },
+  "homepage": "https://github.com/ioswukai/guiguyunyinyue#readme",
+  "dependencies": {
+    "pubsub-js": "^1.9.4"
+  }
+}
