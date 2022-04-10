@@ -66,7 +66,7 @@ Page({
 
   // 获取音乐详情信息 并自动播放当前的音乐 的功能函数，    
   async getMusicInfo(musicId){
-    let data = {ids: musicId}
+    let data = {ids: musicId} 
     let songData = await request('/song/detail', {data});
     this.setData({
       song: songData.songs[0],
