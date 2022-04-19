@@ -1,4 +1,5 @@
 import PubSub from 'pubsub-js';
+import dayjs from 'dayjs';
 import request from '../../utils/request'
 // 获取全局实例
 const appInstance = getApp();
@@ -11,6 +12,8 @@ Page({
     isPlay: false, // 标识音乐是否播放
     song: {}, // 歌曲详情对象
     musicLink: '', // 音乐的链接
+    currentTime: '00:00', // 当前播放时长
+    durationTime: '00:00', // 总时长
   },
 
   /**
@@ -68,8 +71,11 @@ Page({
   async getMusicInfo(musicId){
     let data = {ids: musicId}
     let songData = await request('/song/detail', {data});
+    let song = songData.songs[0];
+    let durationTime = dayjs(song.dt).format('mm:ss')
     this.setData({
-      song: songData.songs[0],
+      song,
+      durationTime,
     })
     
     // 动态修改窗口标题

@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ioswukai/guiguyunyinyue#readme",
   "dependencies": {
+    "dayjs": "^1.11.1",
     "pubsub-js": "^1.9.4"
   }
 }
