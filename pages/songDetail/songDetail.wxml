@@ -10,8 +10,9 @@
   <!-- 进度条控制区域 -->
   <view class="progressControl">
     <text>{{currentTime}}</text>
-      <view class="barControl">
-        <view class="audio-currentTime-Bar" style="width: {{currentWidth+ 'rpx'}}">
+      <view class="barControl"  bindtouchstart="handleTouchStart"
+      bindtouchmove="handleTouchMove">
+        <view class="audio-currentTime-Bar" style="width: {{currentWidth+ 'rpx'}}" >
           <view class="audio-circle"></view>
         </view>
       </view> 

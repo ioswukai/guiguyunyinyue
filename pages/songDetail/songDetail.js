@@ -161,7 +161,29 @@ Page({
       // 发布消息数据给recommendSong页面
       PubSub.publish('switchType', type)
     },
-
+    handleTouchStart(event){
+      // 获取手指起始坐标
+      let moveX = event.touches[0].pageX;
+      // console.log(moveX)
+      if (moveX < 0) {
+        moveX = 0;
+      } else if (moveX > 450) {
+        moveX = 450
+      }
+      // 跳转到指定位置
+      this.backgroundAudioManager.seek(this.backgroundAudioManager.duration * (moveX/ 450));
+    },
+    handleTouchMove(event){
+      let moveX = event.touches[0].pageX;
+      // console.log(moveX)
+      if (moveX < 0) {
+        moveX = 0;
+      } else if (moveX > 450) {
+        moveX = 450
+      }
+      // 跳转到指定位置
+      this.backgroundAudioManager.seek(this.backgroundAudioManager.duration * (moveX/ 450));
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
