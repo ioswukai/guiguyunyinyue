@@ -11,7 +11,7 @@
   <view class="progressControl">
     <text>{{currentTime}}</text>
       <view class="barControl">
-        <view class="audio-currentTime-Bar">
+        <view class="audio-currentTime-Bar" style="width: {{currentWidth+ 'rpx'}}">
           <view class="audio-circle"></view>
         </view>
       </view> 

@@ -14,6 +14,7 @@ Page({
     musicLink: '', // 音乐的链接
     currentTime: '00:00', // 当前播放时长
     durationTime: '00:00', // 总时长
+    currentWidth: 0, // 实时进度条的宽度
   },
 
   /**
@@ -59,8 +60,10 @@ Page({
       // console.log('当前音乐的总时间长' + this.backgroundAudioManager.duration);
       // console.log('当前音乐的播放时间' + this.backgroundAudioManager.currentTime);
       let currentTime = dayjs(this.backgroundAudioManager.currentTime * 1000).format('mm:ss')
+      let currentWidth = 450 * (this.backgroundAudioManager.currentTime / this.backgroundAudioManager.duration)
       this.setData({
-        currentTime
+        currentTime,
+        currentWidth,
       });
     });
   },
