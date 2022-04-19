@@ -43,7 +43,7 @@ Page({
     }
     
     this.backgroundAudioManager = wx.getBackgroundAudioManager();
-    // 监视音乐播放/暂停/停止
+    // 监视音乐播放/暂停/停止/进度更新
     this.backgroundAudioManager.onPlay(() => {
       this.changePlayState(true);
       // 修改全局音乐播放的id
@@ -54,6 +54,14 @@ Page({
     });
     this.backgroundAudioManager.onStop(() => {
       this.changePlayState(false);
+    });
+    this.backgroundAudioManager.onTimeUpdate(() => {
+      // console.log('当前音乐的总时间长' + this.backgroundAudioManager.duration);
+      // console.log('当前音乐的播放时间' + this.backgroundAudioManager.currentTime);
+      let currentTime = dayjs(this.backgroundAudioManager.currentTime * 1000).format('mm:ss')
+      this.setData({
+        currentTime
+      });
     });
   },
 
@@ -72,6 +80,7 @@ Page({
     let data = {ids: musicId}
     let songData = await request('/song/detail', {data});
     let song = songData.songs[0];
+    // dt 单位是毫秒
     let durationTime = dayjs(song.dt).format('mm:ss')
     this.setData({
       song,
