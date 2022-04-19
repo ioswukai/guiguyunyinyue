@@ -44,7 +44,7 @@ Page({
     }
     
     this.backgroundAudioManager = wx.getBackgroundAudioManager();
-    // 监视音乐播放/暂停/停止/进度更新
+    // 监视音乐播放/暂停/停止（退出播放）/进度更新/自然播放结束
     this.backgroundAudioManager.onPlay(() => {
       this.changePlayState(true);
       // 修改全局音乐播放的id
@@ -64,6 +64,16 @@ Page({
       this.setData({
         currentTime,
         currentWidth,
+      });
+    });
+    this.backgroundAudioManager.onEnded(() => {
+      // 自动切换至下一首音乐，且自动播放
+      this.handleSwitch({currentTarget: {id: 'next'}});
+       
+      // 将实时进度条长度、时间都置0
+      this.setData({
+        currentWidth: 0,
+        currentTime: '00:00',
       });
     });
   },
