@@ -17,6 +17,7 @@
 }
 .searchInput input {
   margin-left: 20rpx;
+  flex: 1
 }
 .searchIcon {
   margin-left: 20rpx;
