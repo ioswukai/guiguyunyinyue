@@ -1,4 +1,5 @@
 import PubSub from 'pubsub-js';
+import dayjs from 'dayjs';
 import request from '../../utils/request'
 // 获取全局实例
 const appInstance = getApp();
@@ -11,6 +12,9 @@ Page({
     isPlay: false, // 标识音乐是否播放
     song: {}, // 歌曲详情对象
     musicLink: '', // 音乐的链接
+    currentTime: '00:00', // 当前播放时长
+    durationTime: '00:00', // 总时长
+    currentWidth: 0, // 实时进度条的宽度
   },
 
   /**
@@ -40,7 +44,7 @@ Page({
     }
     
     this.backgroundAudioManager = wx.getBackgroundAudioManager();
-    // 监视音乐播放/暂停/停止
+    // 监视音乐播放/暂停/停止（退出播放）/进度更新/自然播放结束
     this.backgroundAudioManager.onPlay(() => {
       this.changePlayState(true);
       // 修改全局音乐播放的id
@@ -51,6 +55,26 @@ Page({
     });
     this.backgroundAudioManager.onStop(() => {
       this.changePlayState(false);
+    });
+    this.backgroundAudioManager.onTimeUpdate(() => {
+      // console.log('当前音乐的总时间长' + this.backgroundAudioManager.duration);
+      // console.log('当前音乐的播放时间' + this.backgroundAudioManager.currentTime);
+      let currentTime = dayjs(this.backgroundAudioManager.currentTime * 1000).format('mm:ss')
+      let currentWidth = 450 * (this.backgroundAudioManager.currentTime / this.backgroundAudioManager.duration)
+      this.setData({
+        currentTime,
+        currentWidth,
+      });
+    });
+    this.backgroundAudioManager.onEnded(() => {
+      // 自动切换至下一首音乐，且自动播放
+      this.handleSwitch({currentTarget: {id: 'next'}});
+       
+      // 将实时进度条长度、时间都置0
+      this.setData({
+        currentWidth: 0,
+        currentTime: '00:00',
+      });
     });
   },
 
@@ -68,8 +92,12 @@ Page({
   async getMusicInfo(musicId){
     let data = {ids: musicId} 
     let songData = await request('/song/detail', {data});
+    let song = songData.songs[0];
+    // dt 单位是毫秒
+    let durationTime = dayjs(song.dt).format('mm:ss')
     this.setData({
-      song: songData.songs[0],
+      song,
+      durationTime,
     })
     
     // 动态修改窗口标题
@@ -133,7 +161,29 @@ Page({
       // 发布消息数据给recommendSong页面
       PubSub.publish('switchType', type)
     },
-
+    handleTouchStart(event){
+      // 获取手指起始坐标
+      let moveX = event.touches[0].pageX;
+      // console.log(moveX)
+      if (moveX < 0) {
+        moveX = 0;
+      } else if (moveX > 450) {
+        moveX = 450
+      }
+      // 跳转到指定位置
+      this.backgroundAudioManager.seek(this.backgroundAudioManager.duration * (moveX/ 450));
+    },
+    handleTouchMove(event){
+      let moveX = event.touches[0].pageX;
+      // console.log(moveX)
+      if (moveX < 0) {
+        moveX = 0;
+      } else if (moveX > 450) {
+        moveX = 450
+      }
+      // 跳转到指定位置
+      this.backgroundAudioManager.seek(this.backgroundAudioManager.duration * (moveX/ 450));
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
