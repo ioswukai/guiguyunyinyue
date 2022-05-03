@@ -1,4 +1,4 @@
-// pages/other/other.js
+import request from '../../utils/request'
 Page({
 
   /**
@@ -9,6 +9,20 @@ Page({
       username: "curry",
       age: 33
     }
+  },
+
+  // 获取用户openid的回调
+  handleGetOpenid() {
+     // 1. 获取登录凭证 code
+      wx.login({
+        success: async (res) => {
+          const code = res.code;
+          // 2. 将登录凭证发送给 开发者服务器
+          const data = {code}
+          const result = await request('/getOpenId', {data})
+          console.log(result);
+        },
+      })
   },
 
   /**
