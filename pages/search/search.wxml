@@ -8,15 +8,30 @@
     <text class="cancel">取消</text>
   </view>
 
-  <!-- 热搜榜 -->
-  <view class="hotContainer">
-    <view class="title">热搜榜</view>
-    <view class="hotList">
-      <view class="hotItem"  wx:for="{{hotList}}" wx:key="searchWord">
-        <text class="order">{{index + 1}}</text>
-        <text>{{item.searchWord}}</text>
-        <image class="iconImg" wx:if="{{item.iconUrl}}" src="{{item.iconUrl}}"></image>
+  <!-- 搜索内容展示 -->
+  <block wx:if="{{searchList.length > 0}}">
+    <view class="showSearchContent">
+      <view class="searchContent">搜索内容：{{searchContent}}</view>
+      <view class="searchList">
+        <view class="searchItem" wx:for="{{searchList}}" wx:key="id">
+          <text class="iconfont icon-search1"></text>
+          <text class="content">{{item.name}}</text>
+        </view>
       </view>
     </view>
-  </view>
+  </block>
+  
+  <!-- 热搜榜 -->
+  <block wx:else>
+    <view class="hotContainer">
+      <view class="title">热搜榜</view>
+      <view class="hotList">
+        <view class="hotItem"  wx:for="{{hotList}}" wx:key="searchWord">
+          <text class="order">{{index + 1}}</text>
+          <text>{{item.searchWord}}</text>
+          <image class="iconImg" wx:if="{{item.iconUrl}}" src="{{item.iconUrl}}"></image>
+        </view>
+      </view>
+    </view>
+  </block>
 </view>
