@@ -1,0 +1,8 @@
+<!-- 引入模板  src后跟模板路径-->
+<import src="/template/myTemplate/myTemplate.wxml"></import>
+<view class="otherContainer">
+  <!-- 测试模板 -->
+  <view class="otherTitle">测试使用模板</view>
+  <!-- 使用模板 -->
+  <template is="myTmp" data="{{...person}}"></template>
+</view>
