@@ -9,6 +9,7 @@
   margin: 20rpx 0rpx;
 }
 .searchInput {
+  position: relative;
   display: flex;
   align-items: center;
   flex: 1;
@@ -18,6 +19,13 @@
 .searchInput input {
   margin-left: 20rpx;
   flex: 1
+}
+.searchInput .clear {
+  position: absolute;
+  right: 30rpx;
+  top: 0;
+  font-size: 30rpx;
+  z-index: 10;
 }
 .searchIcon {
   margin-left: 20rpx;
@@ -31,19 +39,19 @@
 }
 
 /* 热搜榜 */
-.title {
+.hotContainer .title {
   font-size: 28rpx;
   height: 80rpx;
   line-height: 80rpx;
   border-bottom: 1rpx solid #eee;
 }
-.hotList {
+.hotContainer .hotList {
   /* 流式布局 */
   display: flex;
   /* 需要换行 */ 
   flex-wrap: wrap;
 }
-.hotItem {
+.hotContainer .hotItem {
   /* 分为两列 */
   width: 50%;
   height: 80rpx;
@@ -77,4 +85,33 @@
   margin-left: 20rpx;
   border-bottom: 1rpx solid #eee;
   font-size: 26rpx;
+}
+
+/* 搜索历史记录 */
+.history {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20rpx 0;
+}
+.history .title {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
+}
+.history .historyItem {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 26rpx;
+  background-color: #ededed;
+  margin-left: 20rpx;
+  padding: 0 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+.history .delete {
+  position: absolute;
+  bottom: 10rpx;
+  right: 15rpx;
+  font-size: 36rpx;
 }

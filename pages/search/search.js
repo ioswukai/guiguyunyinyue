@@ -21,6 +21,9 @@ Page({
   onLoad(options) {
     // 获取初始化数据
     this.getInitData();
+    
+    // 获取历史记录
+    this.getSearchHistory();
   },
   // 获取初始化的数据
   async getInitData(){
@@ -30,6 +33,17 @@ Page({
       placeholderContent: placeholderData.data.showKeyword,
       hotList: hotListData.data
     })
+  },
+  
+  // 获取本地历史记录的功能函数
+  getSearchHistory(){
+    let historyList = wx.getStorageSync('searchHistory');
+    // 有值 则显示
+    if(historyList){
+      this.setData({
+        historyList
+      })
+    }
   },
   
   /** 表单选内容发送改变的回调 */
@@ -60,17 +74,25 @@ Page({
     })
     
     // 将搜索的关键字添加到搜索历史记录中
-    // if(historyList.indexOf(searchContent) !== -1){
-    //   historyList.splice(historyList.indexOf(searchContent), 1)
-    // }
-    // historyList.unshift(searchContent);
-    // this.setData({
-    //   historyList
-    // })
+    if(historyList.indexOf(searchContent) !== -1){
+      // 之前有 先删除
+      historyList.splice(historyList.indexOf(searchContent), 1)
+    }
+    historyList.unshift(searchContent);
+    this.setData({
+      historyList
+    })
     
-    // wx.setStorageSync('searchHistory', historyList)
+    wx.setStorageSync('searchHistory', historyList)
   },
 
+  // 清空搜索内容
+  clearSearchContent() {
+    this.setData({
+      searchContent: '',
+      searchList: []
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
