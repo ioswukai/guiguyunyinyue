@@ -109,8 +109,16 @@ Page({
         } 
       }
     })
-    
-    
+  },
+
+  // 点击历史搜索记录
+  tapHistoryItem(event) {
+    const searchContent = event.currentTarget.id;
+    this.setData({
+      searchContent
+    });
+    // 发起请求
+    this.getSearchList();
   },
 
   /**
