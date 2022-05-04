@@ -1,11 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/other/other",
     "pages/search/search",
-    "pages/recommendSong/recommendSong",
     "pages/personal/personal",
-    "pages/songDetail/songDetail",
     "pages/video/video",
     "pages/login/login"
   ],
@@ -43,5 +40,20 @@
     "audio"
   ],
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "subPackages": [
+    {
+      "root": "songPackage",
+      "pages":[
+        "pages/recommendSong/recommendSong",
+        "pages/songDetail/songDetail"
+      ]
+    },
+    {
+      "root": "otherPackage",
+      "pages":[
+        "pages/other/other"
+      ]
+    }
+  ]
 }

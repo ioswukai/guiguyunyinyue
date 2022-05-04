@@ -1,6 +1,6 @@
 import PubSub from 'pubsub-js';
 import dayjs from 'dayjs';
-import request from '../../utils/request'
+import request from '../../../utils/request'
 // 获取全局实例
 const appInstance = getApp();
 Page({

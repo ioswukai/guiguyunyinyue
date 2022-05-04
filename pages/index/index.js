@@ -71,14 +71,14 @@ Page({
   // 跳转至每日推荐
   toRecommendSong () {
     wx.navigateTo({
-      url: '/pages/recommendSong/recommendSong',
+      url: '/songPackage/pages/recommendSong/recommendSong',
     })
   },
 
   // 跳转至other页面
   toOther() {
     wx.navigateTo({
-      url: '/pages/other/other',
+      url: '/otherPackage/pages/other/other',
     })
   },
 
