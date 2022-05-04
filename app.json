@@ -47,7 +47,8 @@
       "pages":[
         "pages/recommendSong/recommendSong",
         "pages/songDetail/songDetail"
-      ]
+      ],
+      "independent": true
     },
     {
       "root": "otherPackage",

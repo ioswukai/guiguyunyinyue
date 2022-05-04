@@ -1,3 +1,10 @@
+@import "/static/iconfont/iconfont.wxss";
+
+/* 为所有page标签添加高度限制 */
+page {
+  height: 100%;
+}
+
 /* 头部区域 */
 .recommendSongContainer .header {
   position: relative;
