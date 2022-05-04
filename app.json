@@ -52,9 +52,15 @@
     },
     {
       "root": "otherPackage",
+      "name": "other",
       "pages":[
         "pages/other/other"
       ]
     }
-  ]
+  ],
+  "preloadRule":{
+    "pages/index/index": {
+      "packages": ["songPackage", "other"]
+    }
+  }
 }
